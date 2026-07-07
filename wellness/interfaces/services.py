@@ -28,7 +28,7 @@ def create_vehicle_metric_record():
         api_key = auth_header.split(' ')[1]
         data = request.json
 
-        device_id = data["device_id"]
+        device_id = data["deviceId"]
 
         # Authenticate device using AuthApplicationService
         from iam.application.services import AuthApplicationService
@@ -38,7 +38,7 @@ def create_vehicle_metric_record():
             return jsonify({'error': 'Autenticación fallida'}), 401
 
         # Extract data from request
-        vehicle_id = data["vehicle_id"]
+        vehicle_id = data["vehicleId"]
         latitude = data["latitude"]
         longitude = data["longitude"]
         CO2Ppm = data["CO2Ppm"]
@@ -58,7 +58,7 @@ def create_vehicle_metric_record():
         # Assemble payload for external API
         import requests
 
-        api_url = "https://bykerz-backend.onrender.com/api/v1/metrics"
+        api_url = "https://strong-surprise-production-ef50.up.railway.app/api/v1/metrics"
         headers = {
             "Authorization": f"Bearer {api_key}",
             "Content-Type": "application/json"
@@ -82,8 +82,8 @@ def create_vehicle_metric_record():
         # Return response including external API status
         return jsonify({
             "id": record.id,
-            "device_id": record.device_id,
-            "vehicle_id": record.vehicle_id,
+            "deviceId": record.device_id,
+            "vehicleId": record.vehicle_id,
             "latitude": record.latitude,
             "longitude": record.longitude,
             "CO2Ppm": record.CO2Ppm,
