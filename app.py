@@ -1,9 +1,16 @@
 from flask import Flask
+import logging
 
 from iam.application.services import AuthApplicationService
 from iam.interfaces.services import iam_api
 from shared.infrastructure.database import init_db
 from wellness.interfaces.services import wellness_api
+
+logging.basicConfig(
+    level=logging.DEBUG,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
+logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
 
@@ -31,7 +38,7 @@ def about_edge_service():
         Show information about the edge service.
         :return: A string containing information about the edge service.
         """
-    return "Bykerz IoT Edge Service - Bykerz Application"
+    return "Octane IoT Edge Service - Octane Application"
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0' ,debug=True)
